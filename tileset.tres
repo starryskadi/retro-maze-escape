@@ -1,0 +1,80 @@
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://bqmnrd2ehinni"]
+
+[ext_resource type="Texture2D" uid="uid://hu15engmhxok" path="res://assets/maze_tilemap.png" id="1_23ttm"]
+[ext_resource type="PackedScene" uid="uid://c3nail4xqu5a1" path="res://scene/exit.tscn" id="2_w1r0j"]
+[ext_resource type="Texture2D" uid="uid://3dodtvfvbyu5" path="res://assets/maze_breadcrumb.png" id="3_i8fuk"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_lrk07"]
+tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 131072, 2, 1, 65536, 0, 65537, 131072, 1, 131073, 0, 2, 2, 131072, 0, 65538, 65536, 2, 131074, 0, 2)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3aot"]
+texture = ExtResource("1_23ttm")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0/terrains_peering_bit/top_left_corner = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f7yrs"]
+scenes/1/scene = ExtResource("2_w1r0j")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eobid"]
+resource_name = "breadcrumb"
+texture = ExtResource("3_i8fuk")
+0:0/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "tree"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_d3aot")
+sources/1 = SubResource("TileSetScenesCollectionSource_f7yrs")
+sources/2 = SubResource("TileSetAtlasSource_eobid")
+pattern_0 = SubResource("TileMapPattern_lrk07")

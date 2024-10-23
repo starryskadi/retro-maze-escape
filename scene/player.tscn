@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://dr3wmik3crfhv"]
+
+[ext_resource type="Script" path="res://scene/player.gd" id="1_80sxm"]
+[ext_resource type="Texture2D" uid="uid://bo31ow7617o3l" path="res://assets/maze_sprite.png" id="1_cok0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0ab8"]
+atlas = ExtResource("1_cok0x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7p8y"]
+atlas = ExtResource("1_cok0x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kslu0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0ab8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7p8y")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43m56"]
+size = Vector2(5, 9)
+
+[sub_resource type="Gradient" id="Gradient_dkctf"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.753247)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pbmb3"]
+gradient = SubResource("Gradient_dkctf")
+width = 100
+height = 100
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_h2mk3"]
+offsets = PackedFloat32Array(0.996753, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d5ket"]
+gradient = SubResource("Gradient_h2mk3")
+
+[sub_resource type="Animation" id="Animation_4ypvl"]
+resource_name = "torch_light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TorchLight:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.9, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmi0l"]
+_data = {
+"torch_light": SubResource("Animation_4ypvl")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_80sxm")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+sprite_frames = SubResource("SpriteFrames_kslu0")
+animation = &"idle"
+frame_progress = 0.6904
+offset = Vector2(0.5, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_43m56")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="TorchLight" type="PointLight2D" parent="."]
+energy = 2.0
+shadow_item_cull_mask = 0
+texture = SubResource("GradientTexture2D_pbmb3")
+metadata/_edit_lock_ = true
+
+[node name="CharacterLight" type="PointLight2D" parent="."]
+energy = 1.2
+blend_mode = 2
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_d5ket")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_xmi0l")
+}
