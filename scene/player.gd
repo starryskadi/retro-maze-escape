@@ -24,6 +24,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play('side_walk')
 	
 	if direction.length() > 0:
-		animated_sprite_2d.flip_h = direction.x < 0.0
+		if direction.y == 0:
+			animated_sprite_2d.flip_h = direction.x < 0.0
 	
 	move_and_slide()
