@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Retro Maze Escape"
+config/description="Retro Maze Escape is a maze puzzle game built with the Godot Engine. In this game, players navigate through a maze, attempting to find the exit, leaving breadcrumbs to track their path. "
+config/version="1.0.0"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://icon.png"
+config/icon="res://icon.png"
+config/macos_native_icon="res://icon.png"
+config/windows_native_icon="res://icon.png"
 
 [display]
 
