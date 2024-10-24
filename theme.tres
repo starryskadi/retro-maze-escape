@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://chpoul6u2rei1"]
+
+[ext_resource type="FontFile" uid="uid://bffxb470q6v57" path="res://assets/fonts/minecraft.ttf" id="1_qyob2"]
+
+[resource]
+default_font = ExtResource("1_qyob2")

@@ -2,10 +2,11 @@ extends Node2D
 @onready var maze_tilemap: TileMapLayer = %Maze
 @onready var player: CharacterBody2D = %Player
 @onready var breadcrumbs_tilemap: TileMapLayer = %Breadcrumbs
+@onready var label: Label = %Label
 
 signal breadcrumb_changed(breadcrumbs_locations: Vector2i, total_breadcrumbs: int)
 
-var total_breadcrumbs := 3
+var total_breadcrumbs := 10
 var breadcrumbs_locations: Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
@@ -32,5 +33,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_breadcrumbs_changed(breadcrumbs_locations: Array[Vector2i], total_breadcrumbs: int) -> void:
 	breadcrumbs_tilemap.clear()
+	label.text = 'x ' + str(breadcrumbs_locations.size())
 	for location in breadcrumbs_locations:
 		breadcrumbs_tilemap.set_cell(location, 2, Vector2i(0, 0))

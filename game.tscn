@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://gy4o0un4vkdp"]
+[gd_scene load_steps=6 format=4 uid="uid://gy4o0un4vkdp"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_a1o0i"]
 [ext_resource type="TileSet" uid="uid://bqmnrd2ehinni" path="res://tileset.tres" id="2_qg8hy"]
 [ext_resource type="PackedScene" uid="uid://dr3wmik3crfhv" path="res://scene/player.tscn" id="3_nhkmy"]
+[ext_resource type="Theme" uid="uid://chpoul6u2rei1" path="res://theme.tres" id="4_6vcjw"]
+[ext_resource type="Texture2D" uid="uid://3dodtvfvbyu5" path="res://assets/maze_breadcrumb.png" id="5_lk0cq"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_a1o0i")
@@ -25,8 +27,36 @@ collision_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("3_nhkmy")]
 unique_name_in_owner = true
-position = Vector2(-160, -200)
+position = Vector2(-160, -192)
 motion_mode = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 24.0
+theme = ExtResource("4_6vcjw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 61.0
+offset_bottom = 28.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("5_lk0cq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x 0"
