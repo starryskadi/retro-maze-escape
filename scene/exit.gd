@@ -9,4 +9,4 @@ func _on_body_entered(body: Node2D) -> void:
 		exit()
 
 func exit() -> void:
-	get_tree().change_scene_to_file("res://scene/end_scene.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://scene/end_scene.tscn")

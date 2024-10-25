@@ -62,6 +62,7 @@ texture = ExtResource("1_23ttm")
 2:2/0/terrains_peering_bit/top_left_corner = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f7yrs"]
+resource_name = "exit_scene"
 scenes/1/scene = ExtResource("2_w1r0j")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eobid"]
