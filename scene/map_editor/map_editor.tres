@@ -1,0 +1,10 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://wetlev6j5qbk"]
+
+[ext_resource type="Texture2D" uid="uid://ddcnsaubv3mcu" path="res://assets/maze_pointer.png" id="1_50yuo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3y0n1"]
+texture = ExtResource("1_50yuo")
+0:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_3y0n1")
