@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b42bq8d6118hr"]
+[gd_scene load_steps=15 format=3 uid="uid://b42bq8d6118hr"]
 
 [ext_resource type="Script" path="res://scene/map_editor/map_editor.gd" id="1_uqeq3"]
 [ext_resource type="TileSet" uid="uid://bqmnrd2ehinni" path="res://tileset.tres" id="2_fw7wx"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dp0akilrhivpq" path="res://assets/maze_editor_delete.png" id="7_6p5jx"]
 [ext_resource type="Texture2D" uid="uid://dp4rs76q6revj" path="res://assets/maze_start.png" id="8_wpv28"]
 [ext_resource type="Texture2D" uid="uid://e5uth2vum41t" path="res://assets/maze_trap_door.png" id="9_ypdqb"]
+[ext_resource type="Texture2D" uid="uid://b0xatscyu6k4c" path="res://assets/maze_editor_play.png" id="11_80krx"]
+[ext_resource type="Texture2D" uid="uid://o0ryi85nfgp3" path="res://assets/maze_editor_exit.png" id="11_aqpu7"]
+[ext_resource type="Texture2D" uid="uid://g832cd4aihwc" path="res://assets/maze_editor_save.png" id="11_gbjd3"]
+[ext_resource type="Texture2D" uid="uid://dkyanovyhvlrh" path="res://assets/maze_editor_upload.png" id="13_wwqsv"]
 
 [node name="Map Editor" type="Node2D"]
 script = ExtResource("1_uqeq3")
@@ -35,8 +39,17 @@ tile_set = ExtResource("4_nldws")
 script = ExtResource("4_ffqs1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="Exit" type="Button" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+theme = ExtResource("5_2foi5")
+icon = ExtResource("11_aqpu7")
+
+[node name="ToolsBar" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -51,45 +64,70 @@ grow_vertical = 0
 size_flags_vertical = 8
 theme = ExtResource("5_2foi5")
 
-[node name="Move" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Move" type="Button" parent="CanvasLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("5_mxj1c")
 icon_alignment = 1
 
-[node name="Path" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Path" type="Button" parent="CanvasLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("6_ray01")
 icon_alignment = 1
 
-[node name="Erase" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Erase" type="Button" parent="CanvasLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("7_6p5jx")
 icon_alignment = 1
 
-[node name="Start" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Start" type="Button" parent="CanvasLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("8_wpv28")
 icon_alignment = 1
 
-[node name="End" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="End" type="Button" parent="CanvasLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("9_ypdqb")
 icon_alignment = 1
 
-[node name="Check" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Check" type="Button" parent="CanvasLayer/ToolsBar"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 action_mode = 0
 text = "Check"
 icon_alignment = 1
+
+[node name="TopRightBar" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 24.0
+grow_horizontal = 0
+theme = ExtResource("5_2foi5")
+
+[node name="Play" type="Button" parent="CanvasLayer/TopRightBar"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("11_80krx")
+
+[node name="Save" type="Button" parent="CanvasLayer/TopRightBar"]
+layout_mode = 2
+icon = ExtResource("11_gbjd3")
+
+[node name="Upload" type="Button" parent="CanvasLayer/TopRightBar"]
+layout_mode = 2
+icon = ExtResource("13_wwqsv")

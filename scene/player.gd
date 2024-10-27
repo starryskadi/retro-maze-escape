@@ -7,6 +7,8 @@ const SPEED = 45.0
 func _ready() -> void:
 	animated_sprite_2d.play('idle')
 	animation_player.play('torch_light')
+	
+	SharedSignals.exit_preview.connect(_on_exit_preview)
 
 
 func _physics_process(delta: float) -> void:
@@ -32,3 +34,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:		
 	if event.is_action('put_breadcrumb') and event.is_action_pressed("put_breadcrumb"):
 		SharedSignals.breadcrumbs_added.emit(global_position)		
+
+func _on_exit_preview() -> void:		
+	queue_free()
