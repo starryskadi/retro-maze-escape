@@ -10,19 +10,45 @@ var prev_viewport_with_zoom: Vector2
 var camera_max_zoom_limit = Vector2(2, 2)
 var camera_min_zoom_limit = Vector2(1, 1)
 
+@onready var path_btn: Button = %Path
+@onready var erase_btn: Button = %Erase
+
+
+enum MAP_EDITOR_ACTION {
+	MOVE,
+	DRAW_PATH,
+	DRAW_START,
+	DRAW_END,
+	ERASE_CELL
+}
+
+var current_map_editor_action = MAP_EDITOR_ACTION.DRAW_PATH
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	path_btn.pressed.connect(func() -> void:
+		current_map_editor_action = MAP_EDITOR_ACTION.DRAW_PATH
+	)
+	
+	erase_btn.pressed.connect(func() -> void:
+		current_map_editor_action = MAP_EDITOR_ACTION.ERASE_CELL
+	)
+	
 	emit_camera_view_port_changed()
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed('mouse_left'):
 		var selected_tile = maze.local_to_map(get_global_mouse_position())
-		maze.set_cells_terrain_connect([selected_tile], 0, 0 , false)
+		match current_map_editor_action:
+			MAP_EDITOR_ACTION.DRAW_PATH:				
+				maze.set_cells_terrain_connect([selected_tile], 0, 0 , false)
+			MAP_EDITOR_ACTION.ERASE_CELL:				
+				maze.erase_cell(selected_tile)	
+				
 	elif Input.is_action_pressed('mouse_right'):
 		pointer.position = pointer.position.lerp(get_global_mouse_position(), 2.0 * delta)
 		emit_camera_view_port_changed()
-		#var selected_tile = maze.local_to_map(get_global_mouse_position())
-		#maze.erase_cell(selected_tile)	
+
 	elif Input.is_action_just_pressed("mouse_up"):		
 		if camera_2d.zoom < camera_max_zoom_limit:
 			camera_2d.zoom = camera_2d.zoom + camera_2d.zoom * 0.1
