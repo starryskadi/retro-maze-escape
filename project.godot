@@ -21,6 +21,10 @@ config/icon="res://icon.png"
 config/macos_native_icon="res://icon.png"
 config/windows_native_icon="res://icon.png"
 
+[autoload]
+
+SharedSignals="*res://shared_signals.gd"
+
 [display]
 
 window/size/viewport_width=320
