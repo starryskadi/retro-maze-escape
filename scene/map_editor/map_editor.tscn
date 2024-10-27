@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://b42bq8d6118hr"]
+[gd_scene load_steps=11 format=3 uid="uid://b42bq8d6118hr"]
 
 [ext_resource type="Script" path="res://scene/map_editor/map_editor.gd" id="1_uqeq3"]
 [ext_resource type="TileSet" uid="uid://bqmnrd2ehinni" path="res://tileset.tres" id="2_fw7wx"]
 [ext_resource type="Script" path="res://scene/map_editor/map_grid.gd" id="4_ffqs1"]
 [ext_resource type="TileSet" uid="uid://wetlev6j5qbk" path="res://scene/map_editor/map_editor.tres" id="4_nldws"]
+[ext_resource type="Theme" uid="uid://chpoul6u2rei1" path="res://theme.tres" id="5_2foi5"]
+[ext_resource type="Texture2D" uid="uid://crr5ouaf1yf20" path="res://assets/maze_editor_move.png" id="5_mxj1c"]
+[ext_resource type="Texture2D" uid="uid://b8wineuvwhnbu" path="res://assets/maze_editor_path..png" id="6_ray01"]
+[ext_resource type="Texture2D" uid="uid://dp0akilrhivpq" path="res://assets/maze_editor_delete.png" id="7_6p5jx"]
+[ext_resource type="Texture2D" uid="uid://dp4rs76q6revj" path="res://assets/maze_start.png" id="8_wpv28"]
+[ext_resource type="Texture2D" uid="uid://e5uth2vum41t" path="res://assets/maze_trap_door.png" id="9_ypdqb"]
 
 [node name="Map Editor" type="Node2D"]
 script = ExtResource("1_uqeq3")
@@ -31,22 +37,59 @@ script = ExtResource("4_ffqs1")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 12
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -24.0
+offset_right = 48.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+theme = ExtResource("5_2foi5")
+
+[node name="Move" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("5_mxj1c")
+icon_alignment = 1
 
 [node name="Path" type="Button" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
-text = "Path"
+icon = ExtResource("6_ray01")
+icon_alignment = 1
 
 [node name="Erase" type="Button" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
-text = "Erase"
+icon = ExtResource("7_6p5jx")
+icon_alignment = 1
+
+[node name="Start" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("8_wpv28")
+icon_alignment = 1
+
+[node name="End" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("9_ypdqb")
+icon_alignment = 1
+
+[node name="Check" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+action_mode = 0
+text = "Check"
+icon_alignment = 1

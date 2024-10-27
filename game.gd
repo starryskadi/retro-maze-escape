@@ -8,6 +8,8 @@ var breadcrumbs_locations: Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.current_game_mode = Global.GAME_MODE.GAME
+	
 	SharedSignals.breadcrumbs_added.connect(_on_breadcrumbs_added)
 
 func add_breadcrumbs(grid: Vector2i) -> void:

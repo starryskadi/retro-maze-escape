@@ -24,6 +24,7 @@ config/windows_native_icon="res://icon.png"
 [autoload]
 
 SharedSignals="*res://shared_signals.gd"
+Global="*res://global.gd"
 
 [display]
 
