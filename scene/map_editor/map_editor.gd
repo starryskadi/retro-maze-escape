@@ -19,9 +19,6 @@ var camera_min_zoom_limit = Vector2(1, 1)
 @onready var check_btn: Button = %Check
 @onready var play_btn: Button = %Play
 
-var start_tile_location: Vector2i
-var end_tile_location: Vector2i
-
 enum MAP_EDITOR_ACTION {
 	MOVE,
 	DRAW_PATH,
@@ -106,16 +103,17 @@ func _process(delta: float) -> void:
 				maze.set_cells_terrain_connect([selected_tile], 0, 0 , false)
 			MAP_EDITOR_ACTION.ERASE_CELL:				
 				maze.erase_cell(selected_tile)	
-			MAP_EDITOR_ACTION.ADD_START:	
-				if start_tile_location:
-					maze.erase_cell(start_tile_location)	
-				start_tile_location = selected_tile
+			MAP_EDITOR_ACTION.ADD_START:					
+				var start_cells = maze.get_used_cells_by_id(1, Vector2.ZERO, 2)
+				for cell in start_cells:
+					maze.erase_cell(cell)		
+								
 				maze.set_cell(selected_tile, 1, Vector2.ZERO, 2)	
-				
 			MAP_EDITOR_ACTION.ADD_END:	
-				if end_tile_location:
-					maze.erase_cell(end_tile_location)									
-				end_tile_location = selected_tile 				
+				var end_cells = maze.get_used_cells_by_id(1, Vector2.ZERO, 1)
+				for cell in end_cells:
+					maze.erase_cell(cell)
+									
 				maze.set_cell(selected_tile, 1, Vector2.ZERO, 1)	
 				
 	elif Input.is_action_pressed('mouse_right'):
