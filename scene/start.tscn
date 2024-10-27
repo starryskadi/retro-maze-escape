@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0xt8y1ob7mla"]
+
+[ext_resource type="Script" path="res://scene/start.gd" id="1_jwfxd"]
+[ext_resource type="Texture2D" uid="uid://dp4rs76q6revj" path="res://assets/maze_start.png" id="2_6712b"]
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_jwfxd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6712b")

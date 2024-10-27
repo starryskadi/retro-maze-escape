@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://bqmnrd2ehinni"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bqmnrd2ehinni"]
 
 [ext_resource type="Texture2D" uid="uid://hu15engmhxok" path="res://assets/maze_tilemap.png" id="1_23ttm"]
 [ext_resource type="PackedScene" uid="uid://c3nail4xqu5a1" path="res://scene/exit.tscn" id="2_w1r0j"]
+[ext_resource type="PackedScene" uid="uid://d0xt8y1ob7mla" path="res://scene/start.tscn" id="3_28gyx"]
 [ext_resource type="Texture2D" uid="uid://3dodtvfvbyu5" path="res://assets/maze_breadcrumb.png" id="3_i8fuk"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_lrk07"]
@@ -62,8 +63,9 @@ texture = ExtResource("1_23ttm")
 2:2/0/terrains_peering_bit/top_left_corner = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f7yrs"]
-resource_name = "exit_scene"
+resource_name = "places"
 scenes/1/scene = ExtResource("2_w1r0j")
+scenes/2/scene = ExtResource("3_28gyx")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eobid"]
 resource_name = "breadcrumb"
