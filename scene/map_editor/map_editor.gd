@@ -96,7 +96,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed('mouse_left'):
-		if any_button_pressed:
+		if any_button_pressed or visible == false:
 			return
 		var selected_tile = maze.local_to_map(get_global_mouse_position())
 		match current_map_editor_action:
