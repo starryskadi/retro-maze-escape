@@ -87,7 +87,7 @@ func _ready() -> void:
 	
 	check_btn.pressed.connect(_on_check_path)
 	
-	SharedSignals.exit_preview.connect(_on_exit_preview)
+	SharedSignals.exit_preview.connect(_on_exit_preview)	
 	
 	emit_camera_view_port_changed()
 
@@ -164,13 +164,13 @@ func _on_play_btn() -> void:
 	
 	add_sibling(game_scene)
 	
-	_toggle_visiblity()
+	_set_visiblity(false)
 
-func _toggle_visiblity() -> void:
-	visible = !visible
-	canvas_layer.visible = !canvas_layer.visible
-	camera_2d.enabled = !camera_2d.enabled
+func _set_visiblity(visiblity: bool) -> void:
+	visible = visiblity
+	canvas_layer.visible = visiblity
+	camera_2d.enabled = visiblity
 
 func _on_exit_preview() -> void:
 	Global.current_game_mode = Global.GAME_MODE.EDITOR
-	_toggle_visiblity()
+	_set_visiblity(true)

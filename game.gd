@@ -17,6 +17,7 @@ func _ready() -> void:
 		maze_tilemap.set_tile_map_data_from_array(initial_tilemap_data)
 		
 	SharedSignals.breadcrumbs_added.connect(_on_breadcrumbs_added)
+	SharedSignals.exit_maze.connect(_on_maze_exit)
 
 func add_breadcrumbs(grid: Vector2i) -> void:
 	var is_already_breadcrumbs = breadcrumbs_locations.find(grid)
@@ -38,8 +39,21 @@ func _on_breadcrumbs_added(player_position) -> void:
 	var current_grid_of_player = breadcrumbs_tilemap.local_to_map(player_position)	
 	add_breadcrumbs(current_grid_of_player)
 
+func _on_maze_exit() -> void:
+	# If the game is not in preview mode
+	if !from_editor_mode and Global.current_game_mode == Global.GAME_MODE.GAME:
+		get_tree().call_deferred("change_scene_to_file", "res://scene/end_scene.tscn")
+		return 
+	
+	# If game is in preview mode	
+	SharedSignals.exit_preview.emit()
+	
+	queue_free()
+	
+	
 func _unhandled_input(event: InputEvent) -> void:	
 	if from_editor_mode:
-		if event.is_action('ui_cancel') and event.is_action_pressed("ui_cancel"):
-			queue_free()
+		if event.is_action('ui_cancel') and event.is_action_pressed("ui_cancel"):			
 			SharedSignals.exit_preview.emit()
+			
+			queue_free()
