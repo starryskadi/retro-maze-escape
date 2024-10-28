@@ -26,6 +26,10 @@ config/windows_native_icon="res://icon.png"
 SharedSignals="*res://shared_signals.gd"
 Global="*res://global.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [display]
 
 window/size/viewport_width=320

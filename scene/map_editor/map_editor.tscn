@@ -21,6 +21,7 @@ script = ExtResource("1_uqeq3")
 [node name="Maze" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
 tile_set = ExtResource("2_fw7wx")
+navigation_enabled = false
 
 [node name="Pointer" type="Node2D" parent="."]
 unique_name_in_owner = true
