@@ -18,6 +18,9 @@ var camera_min_zoom_limit = Vector2(1, 1)
 @onready var move_btn: Button = %Move
 @onready var check_btn: Button = %Check
 @onready var play_btn: Button = %Play
+@onready var save_btn: Button = %Save
+@onready var load_btn: Button = %Load
+@onready var upload_btn: Button = %Upload
 
 enum MAP_EDITOR_ACTION {
 	MOVE,
@@ -34,58 +37,52 @@ var any_button_pressed := false
 func _ready() -> void:
 	Global.current_game_mode = Global.GAME_MODE.EDITOR
 	
-	move_btn.pressed.connect(func() -> void:
-		current_map_editor_action = MAP_EDITOR_ACTION.MOVE
-		any_button_pressed = true
+	connect_btn_and_event_without_propagation(
+		move_btn, 
+		func() -> void:
+			current_map_editor_action = MAP_EDITOR_ACTION.MOVE
+		
 	)
 	
-	move_btn.button_up.connect(func() -> void:
-		any_button_pressed = false
+	connect_btn_and_event_without_propagation(
+		path_btn, 
+		func() -> void:
+			current_map_editor_action = MAP_EDITOR_ACTION.DRAW_PATH		
 	)
 	
-	path_btn.pressed.connect(func() -> void:
-		current_map_editor_action = MAP_EDITOR_ACTION.DRAW_PATH		
-		any_button_pressed = true
+	connect_btn_and_event_without_propagation(erase_btn, 
+		func() -> void:
+			current_map_editor_action = MAP_EDITOR_ACTION.ERASE_CELL		
 	)
 	
-	path_btn.button_up.connect(func() -> void:
-		any_button_pressed = false
+	connect_btn_and_event_without_propagation(
+		start_btn, 
+		func() -> void:
+			current_map_editor_action = MAP_EDITOR_ACTION.ADD_START		
 	)
 	
-	erase_btn.pressed.connect(func() -> void:
-		current_map_editor_action = MAP_EDITOR_ACTION.ERASE_CELL
-		any_button_pressed = true
+	connect_btn_and_event_without_propagation(
+		end_btn, 
+		func() -> void:
+			current_map_editor_action = MAP_EDITOR_ACTION.ADD_END			
 	)
 	
-	erase_btn.button_up.connect(func() -> void:
-		any_button_pressed = false
+	
+	connect_btn_and_event_without_propagation(
+		play_btn,
+		_on_play_btn
 	)
 	
-	start_btn.pressed.connect(func() -> void:
-		current_map_editor_action = MAP_EDITOR_ACTION.ADD_START
-		any_button_pressed = true
+	connect_btn_and_event_without_propagation(
+		save_btn, 
+		_on_save_btn
 	)
 	
-	start_btn.button_up.connect(func() -> void:
-		any_button_pressed = false
+	connect_btn_and_event_without_propagation(
+		load_btn,
+		_on_load_btn
 	)
-	
-	end_btn.pressed.connect(func() -> void:
-		current_map_editor_action = MAP_EDITOR_ACTION.ADD_END
-		any_button_pressed = true
-	)
-	
-	end_btn.button_up.connect(func() -> void:
-		any_button_pressed = false
-	)
-	
-	play_btn.pressed.connect(_on_play_btn)
-	
-	play_btn.button_up.connect(func() -> void:
-		any_button_pressed = false
-	)
-	
-	check_btn.pressed.connect(_on_check_path)
+	connect_btn_and_event_without_propagation(check_btn, _on_check_path)
 	
 	SharedSignals.exit_preview.connect(_on_exit_preview)	
 	
@@ -174,3 +171,26 @@ func _set_visiblity(visiblity: bool) -> void:
 func _on_exit_preview() -> void:
 	Global.current_game_mode = Global.GAME_MODE.EDITOR
 	_set_visiblity(true)
+
+func connect_btn_and_event_without_propagation(btn: Button, callback: Callable) -> void:
+	btn.pressed.connect(func() -> void:
+		any_button_pressed = true
+		callback.call()	
+	)
+	
+	btn.button_up.connect(func() -> void:
+		any_button_pressed = false
+	)
+
+func _on_save_btn() -> void:
+	var directory = DirAccess.open('user://')
+	
+	if !directory.dir_exists("user://maps"):
+		directory.make_dir_recursive("user://maps")
+		
+	var file := FileAccess.open("user://maps/map.dat", FileAccess.WRITE)
+	file.store_buffer(maze.get_tile_map_data_as_array())
+
+func _on_load_btn() -> void:
+	var file := FileAccess.get_file_as_bytes("user://maps/map.dat")
+	maze.set_tile_map_data_from_array(file)
