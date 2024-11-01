@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b42bq8d6118hr"]
+[gd_scene load_steps=19 format=3 uid="uid://b42bq8d6118hr"]
 
 [ext_resource type="Script" path="res://scene/map_editor/map_editor.gd" id="1_uqeq3"]
 [ext_resource type="TileSet" uid="uid://bqmnrd2ehinni" path="res://tileset.tres" id="2_fw7wx"]
@@ -15,6 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://mdfuyhrsc0m8" path="res://assets/maze_editor_save.png" id="11_gbjd3"]
 [ext_resource type="Texture2D" uid="uid://dkyanovyhvlrh" path="res://assets/maze_editor_upload.png" id="13_wwqsv"]
 [ext_resource type="Texture2D" uid="uid://c1gwyqcygopsi" path="res://assets/maze_editor_load.png" id="14_s028x"]
+[ext_resource type="Theme" uid="uid://bg4vacjxxtuyh" path="res://save_load_theme.tres" id="16_c8d6g"]
+[ext_resource type="Shader" path="res://scene/map_editor/blur.gdshader" id="16_ja3g4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fdh0"]
+shader = ExtResource("16_ja3g4")
+shader_parameter/lod = 1.0
 
 [node name="Map Editor" type="Node2D"]
 script = ExtResource("1_uqeq3")
@@ -40,10 +46,10 @@ tile_set = ExtResource("4_nldws")
 [node name="Map Grid" type="Node2D" parent="."]
 script = ExtResource("4_ffqs1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ButtonsLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
-[node name="Exit" type="Button" parent="CanvasLayer"]
+[node name="Exit" type="Button" parent="ButtonsLayer"]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 24.0
@@ -51,7 +57,7 @@ offset_bottom = 24.0
 theme = ExtResource("5_2foi5")
 icon = ExtResource("11_aqpu7")
 
-[node name="ToolsBar" type="HBoxContainer" parent="CanvasLayer"]
+[node name="ToolsBar" type="HBoxContainer" parent="ButtonsLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -66,42 +72,42 @@ grow_vertical = 0
 size_flags_vertical = 8
 theme = ExtResource("5_2foi5")
 
-[node name="Move" type="Button" parent="CanvasLayer/ToolsBar"]
+[node name="Move" type="Button" parent="ButtonsLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("5_mxj1c")
 icon_alignment = 1
 
-[node name="Path" type="Button" parent="CanvasLayer/ToolsBar"]
+[node name="Path" type="Button" parent="ButtonsLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("6_ray01")
 icon_alignment = 1
 
-[node name="Erase" type="Button" parent="CanvasLayer/ToolsBar"]
+[node name="Erase" type="Button" parent="ButtonsLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("7_6p5jx")
 icon_alignment = 1
 
-[node name="Start" type="Button" parent="CanvasLayer/ToolsBar"]
+[node name="Start" type="Button" parent="ButtonsLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("8_wpv28")
 icon_alignment = 1
 
-[node name="End" type="Button" parent="CanvasLayer/ToolsBar"]
+[node name="End" type="Button" parent="ButtonsLayer/ToolsBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("9_ypdqb")
 icon_alignment = 1
 
-[node name="Check" type="Button" parent="CanvasLayer/ToolsBar"]
+[node name="Check" type="Button" parent="ButtonsLayer/ToolsBar"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -109,7 +115,7 @@ action_mode = 0
 text = "Check"
 icon_alignment = 1
 
-[node name="TopRightBar" type="HBoxContainer" parent="CanvasLayer"]
+[node name="TopRightBar" type="HBoxContainer" parent="ButtonsLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -120,26 +126,93 @@ offset_bottom = 24.0
 grow_horizontal = 0
 theme = ExtResource("5_2foi5")
 
-[node name="Play" type="Button" parent="CanvasLayer/TopRightBar"]
+[node name="Play" type="Button" parent="ButtonsLayer/TopRightBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("11_80krx")
 
-[node name="Save" type="Button" parent="CanvasLayer/TopRightBar"]
+[node name="Save" type="Button" parent="ButtonsLayer/TopRightBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("11_gbjd3")
 
-[node name="Load" type="Button" parent="CanvasLayer/TopRightBar"]
+[node name="Load" type="Button" parent="ButtonsLayer/TopRightBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("14_s028x")
 
-[node name="Upload" type="Button" parent="CanvasLayer/TopRightBar"]
+[node name="Upload" type="Button" parent="ButtonsLayer/TopRightBar"]
 unique_name_in_owner = true
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("13_wwqsv")
+
+[node name="PopupLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PopupLayer"]
+material = SubResource("ShaderMaterial_5fdh0")
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="PopupLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("16_c8d6g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.5
+offset_top = -28.0
+offset_right = 77.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot 1" type="Button" parent="PopupLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+text = "Slot 1"
+
+[node name="Slot 2" type="Button" parent="PopupLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+text = "Slot 2"
+
+[node name="Slot 3" type="Button" parent="PopupLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+text = "Slot 3"
+
+[node name="PopupExit" type="Button" parent="PopupLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+text = "Exit"

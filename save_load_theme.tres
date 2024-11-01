@@ -1,0 +1,76 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bg4vacjxxtuyh"]
+
+[ext_resource type="FontFile" uid="uid://bffxb470q6v57" path="res://assets/fonts/minecraft.ttf" id="1_ar4o8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qbjl"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 2.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwe66"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 2.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aen1s"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 2.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpvg7"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 2.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ix3rq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecux4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+default_font = ExtResource("1_ar4o8")
+default_font_size = 14
+Button/styles/disabled = SubResource("StyleBoxFlat_0qbjl")
+Button/styles/hover = SubResource("StyleBoxFlat_xwe66")
+Button/styles/normal = SubResource("StyleBoxFlat_aen1s")
+Button/styles/pressed = SubResource("StyleBoxFlat_dpvg7")
+TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
+TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+TooltipLabel/constants/outline_size = 1
+TooltipLabel/constants/shadow_offset_x = 0
+TooltipLabel/constants/shadow_offset_y = 0
+TooltipLabel/font_sizes/font_size = 8
+TooltipLabel/styles/normal = SubResource("StyleBoxEmpty_ix3rq")
+TooltipPanel/font_sizes/title_font_size = 8
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_ecux4")

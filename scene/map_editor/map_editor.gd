@@ -4,7 +4,8 @@ extends Node2D
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var mouse_indicator: TileMapLayer = %MouseIndicator
 @onready var camera_viewport = camera_2d.get_viewport_rect().size
-@onready var canvas_layer: CanvasLayer = %CanvasLayer
+@onready var canvas_layer: CanvasLayer = %ButtonsLayer
+@onready var popup_layer: CanvasLayer = $PopupLayer
 
 var prev_viewport_with_zoom: Vector2
 @onready var prev_camera_position = camera_2d.get_screen_center_position()
@@ -21,6 +22,15 @@ var camera_min_zoom_limit = Vector2(1, 1)
 @onready var save_btn: Button = %Save
 @onready var load_btn: Button = %Load
 @onready var upload_btn: Button = %Upload
+@onready var slot_1_btn: Button = %"Slot 1"
+@onready var slot_2_btn: Button = %"Slot 2"
+@onready var slot_3_btn: Button = %"Slot 3"
+@onready var popup_exit_btn: Button = %PopupExit
+
+enum POPUP_MODE {
+	SAVE,
+	LOAD
+}
 
 enum MAP_EDITOR_ACTION {
 	MOVE,
@@ -32,6 +42,9 @@ enum MAP_EDITOR_ACTION {
 
 var current_map_editor_action = MAP_EDITOR_ACTION.DRAW_PATH
 var any_button_pressed := false
+
+var curent_popup_mode = POPUP_MODE.SAVE
+var show_popup := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -84,13 +97,38 @@ func _ready() -> void:
 	)
 	connect_btn_and_event_without_propagation(check_btn, _on_check_path)
 	
+	popup_exit_btn.pressed.connect(func() -> void:
+		set_popup_visible(false)
+	)
+	
+	var slot_1_file_path = get_file_path_from_mapname('one')
+	slot_1_btn.text = get_modified_date_from_file(slot_1_file_path)
+	
+	var slot_2_file_path = get_file_path_from_mapname('two')
+	slot_2_btn.text = get_modified_date_from_file(slot_2_file_path)
+	
+	var slot_3_file_path = get_file_path_from_mapname('three')
+	slot_3_btn.text = get_modified_date_from_file(slot_2_file_path)	
+	
+	slot_1_btn.pressed.connect(func() -> void:		
+		_on_slot_item_click("one", slot_1_btn)
+	)
+	
+	slot_2_btn.pressed.connect(func() -> void:
+		_on_slot_item_click("two", slot_2_btn)
+	)
+	
+	slot_3_btn.pressed.connect(func() -> void:
+		_on_slot_item_click("three", slot_3_btn)
+	)
+	
 	SharedSignals.exit_preview.connect(_on_exit_preview)	
 	
 	emit_camera_view_port_changed()
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed('mouse_left'):
-		if any_button_pressed or visible == false:
+		if show_popup or any_button_pressed or visible == false:
 			return
 		var selected_tile = maze.local_to_map(get_global_mouse_position())
 		match current_map_editor_action:
@@ -132,6 +170,8 @@ func _move_pointer(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		if show_popup:
+			return
 		mouse_indicator.clear()
 		var selected_tile = mouse_indicator.local_to_map(get_global_mouse_position())
 		mouse_indicator.set_cell(selected_tile, 0 , Vector2i(0,0))		
@@ -182,15 +222,49 @@ func connect_btn_and_event_without_propagation(btn: Button, callback: Callable) 
 		any_button_pressed = false
 	)
 
+func set_popup_visible(visible: bool) -> void:
+	show_popup = visible
+	popup_layer.visible = visible
+
 func _on_save_btn() -> void:
+	curent_popup_mode = POPUP_MODE.SAVE
+	set_popup_visible(true)
+
+func save_slot(map_name: String) -> String:
 	var directory = DirAccess.open('user://')
 	
 	if !directory.dir_exists("user://maps"):
 		directory.make_dir_recursive("user://maps")
-		
-	var file := FileAccess.open("user://maps/map.dat", FileAccess.WRITE)
-	file.store_buffer(maze.get_tile_map_data_as_array())
+	
+	var file_path = get_file_path_from_mapname(map_name)
+	var file := FileAccess.open(file_path, FileAccess.WRITE)
+	file.store_buffer(maze.get_tile_map_data_as_array())		
+	
+	return get_modified_date_from_file(file_path)
+
+func get_file_path_from_mapname(map_name: String) -> String:
+	return "user://maps/map-%s.dat" % map_name
+
+func get_modified_date_from_file(file_path: String) -> String:
+	var modified_time = FileAccess.get_modified_time(file_path)
+	
+	modified_time = Time.get_datetime_dict_from_unix_time(modified_time)	
+	
+	var modified_time_string = "%s-%s-%s %s:%s:%s" % [modified_time.year, modified_time.month, modified_time.day, modified_time.hour, modified_time.minute, modified_time.second]
+	
+	return modified_time_string
 
 func _on_load_btn() -> void:
-	var file := FileAccess.get_file_as_bytes("user://maps/map.dat")
+	curent_popup_mode = POPUP_MODE.LOAD
+	set_popup_visible(true)	
+
+func _on_slot_item_click(map_name: String, slot_btn: Button) -> void:
+	if curent_popup_mode == POPUP_MODE.SAVE:		
+		slot_btn.text = save_slot(map_name)
+		return 
+		
+	var file_path = get_file_path_from_mapname(map_name)
+	var file := FileAccess.get_file_as_bytes(file_path)
+	
 	maze.set_tile_map_data_from_array(file)
+	
