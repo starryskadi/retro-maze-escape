@@ -1,6 +1,6 @@
 # Retro Maze Escape
 
-Retro Maze Escape is a maze puzzle game built with the Godot Engine. In this game, players navigate through a maze, attempting to find the exit, leaving breadcrumbs to track their path. 
+Retro Maze Escape is a maze puzzle game developed with the Godot Engine. Players navigate through a maze, leaving breadcrumbs to track their path as they search for the exit. You can create your own maze to play or have a nearby friend design one for you to solve.
 
 ## Gameplay
 
@@ -11,3 +11,7 @@ Breadcrumbs: Use breadcrumbs to mark paths and avoid wandering in circles. You h
 
 - Move: Arrow Keys
 - Drop & Pick Breadcrumb: Space
+
+## Map Editor Controls
+
+- Escape: Exit preview mode
