@@ -50,6 +50,7 @@ script = ExtResource("4_ffqs1")
 unique_name_in_owner = true
 
 [node name="Exit" type="Button" parent="ButtonsLayer"]
+unique_name_in_owner = true
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 24.0
@@ -146,6 +147,7 @@ icon = ExtResource("14_s028x")
 
 [node name="Upload" type="Button" parent="ButtonsLayer/TopRightBar"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("13_wwqsv")

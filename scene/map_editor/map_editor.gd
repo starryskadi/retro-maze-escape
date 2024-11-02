@@ -26,6 +26,7 @@ var camera_min_zoom_limit = Vector2(1, 1)
 @onready var slot_2_btn: Button = %"Slot 2"
 @onready var slot_3_btn: Button = %"Slot 3"
 @onready var popup_exit_btn: Button = %PopupExit
+@onready var exit_btn: Button = %Exit
 
 enum POPUP_MODE {
 	SAVE,
@@ -120,6 +121,10 @@ func _ready() -> void:
 	
 	slot_3_btn.pressed.connect(func() -> void:
 		_on_slot_item_click("three", slot_3_btn)
+	)
+	
+	connect_btn_and_event_without_propagation(exit_btn, func() -> void:
+		get_tree().change_scene_to_file("res://scene/start_scene.tscn")	
 	)
 	
 	SharedSignals.exit_preview.connect(_on_exit_preview)	

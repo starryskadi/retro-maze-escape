@@ -3,11 +3,19 @@
 [ext_resource type="FontFile" uid="uid://bffxb470q6v57" path="res://assets/fonts/minecraft.ttf" id="1_qyob2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6gfw"]
-bg_color = Color(1, 1, 1, 0)
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
 border_color = Color(1, 1, 1, 0.407843)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk1ec"]
-bg_color = Color(1, 1, 1, 0)
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -16,12 +24,20 @@ border_color = Color(1, 1, 1, 1)
 shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g70ch"]
-bg_color = Color(1, 1, 1, 0)
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
 border_color = Color(1, 1, 1, 0.407843)
 shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iava5"]
-bg_color = Color(1, 1, 1, 0)
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.686275, 0.454902, 0.219608, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1

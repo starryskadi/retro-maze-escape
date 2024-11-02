@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://btpgbtip01fwk"]
+[gd_scene load_steps=7 format=3 uid="uid://btpgbtip01fwk"]
 
 [ext_resource type="Theme" uid="uid://chpoul6u2rei1" path="res://theme.tres" id="1_8ifb7"]
+[ext_resource type="Script" path="res://scene/end_scene.gd" id="2_15f1s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mg1wk"]
 font_size = 23
@@ -50,6 +51,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8ifb7")
+script = ExtResource("2_15f1s")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -82,3 +84,18 @@ libraries = {
 }
 autoplay = "label_show"
 movie_quit_on_finish = true
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -55.0
+offset_right = 48.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = " Go to Menu "

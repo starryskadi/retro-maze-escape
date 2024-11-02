@@ -1,0 +1,195 @@
+[gd_scene load_steps=12 format=3 uid="uid://cchj8wbg5ttcg"]
+
+[ext_resource type="Texture2D" uid="uid://c8naj2nntjr7c" path="res://icon.png" id="1_bj2fn"]
+[ext_resource type="Script" path="res://scene/start_scene.gd" id="1_tofmq"]
+[ext_resource type="Shader" path="res://scene/map_editor/blur.gdshader" id="2_ft373"]
+[ext_resource type="Theme" uid="uid://chpoul6u2rei1" path="res://theme.tres" id="2_pu4d2"]
+[ext_resource type="PackedScene" uid="uid://d0trfshtxw0l6" path="res://levels/start_scene_preview.tscn" id="3_04an4"]
+[ext_resource type="StyleBox" uid="uid://baer67rktxdbl" path="res://scene/start_scene_btn_style.tres" id="6_li5xo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_772vf"]
+shader = ExtResource("2_ft373")
+shader_parameter/lod = 1.55
+
+[sub_resource type="Animation" id="Animation_1hveg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Game:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/HBoxContainer/Label:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/HBoxContainer/TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x76de"]
+resource_name = "label_animation"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/HBoxContainer/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/HBoxContainer/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f3mdi"]
+resource_name = "bg_animation"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Game:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-191, -245)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c5n28"]
+_data = {
+"RESET": SubResource("Animation_1hveg"),
+"bg_animation": SubResource("Animation_f3mdi"),
+"label_animation": SubResource("Animation_x76de")
+}
+
+[node name="Start Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tofmq")
+
+[node name="Game" parent="." instance=ExtResource("3_04an4")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_772vf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_top = 33.0
+offset_right = 98.0
+offset_bottom = 73.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("1_bj2fn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_pu4d2")
+text = "Retro Maze Escape"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -126.0
+offset_right = 89.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Play" type="Button" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_pu4d2")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/hover = ExtResource("6_li5xo")
+theme_override_styles/pressed = ExtResource("6_li5xo")
+theme_override_styles/normal = ExtResource("6_li5xo")
+action_mode = 0
+text = "Play"
+
+[node name="Map Editor" type="Button" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_pu4d2")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/hover = ExtResource("6_li5xo")
+theme_override_styles/pressed = ExtResource("6_li5xo")
+theme_override_styles/normal = ExtResource("6_li5xo")
+action_mode = 0
+text = "Create Own Maze"
+
+[node name="BGAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_c5n28")
+}
+autoplay = "bg_animation"
+
+[node name="LabelAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_c5n28")
+}
+autoplay = "bg_animation"
