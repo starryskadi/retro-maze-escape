@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3eaxrgas6qhs"]
+
+[ext_resource type="Theme" uid="uid://chpoul6u2rei1" path="res://theme.tres" id="1_cq7qp"]
+[ext_resource type="Theme" uid="uid://bg4vacjxxtuyh" path="res://save_load_theme.tres" id="1_gssgi"]
+[ext_resource type="Shader" path="res://scene/map_editor/blur.gdshader" id="1_lwhf5"]
+[ext_resource type="Script" path="res://scene/setting.gd" id="1_oaolu"]
+[ext_resource type="Texture2D" uid="uid://o0ryi85nfgp3" path="res://assets/maze_editor_exit.png" id="2_37sed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fr2aq"]
+shader = ExtResource("1_lwhf5")
+shader_parameter/lod = 1.5
+
+[node name="Setting" type="CanvasLayer"]
+script = ExtResource("1_oaolu")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fr2aq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+theme = ExtResource("1_cq7qp")
+icon = ExtResource("2_37sed")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.456
+anchor_right = 1.0
+anchor_bottom = 0.525
+offset_left = 19.0
+offset_top = -3.44001
+offset_right = -20.0
+offset_bottom = 7.99999
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit" type="TextEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_cq7qp")
+placeholder_text = "Your Paste Bin Key"
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+scroll_smooth = true
+scroll_fit_content_height = true
+
+[node name="Save" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_gssgi")
+text = " SAVE "

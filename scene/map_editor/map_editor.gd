@@ -28,6 +28,8 @@ var camera_min_zoom_limit = Vector2(1, 1)
 @onready var popup_exit_btn: Button = %PopupExit
 @onready var exit_btn: Button = %Exit
 
+var PASTE_BIN_API_KEY = ""
+
 enum POPUP_MODE {
 	SAVE,
 	LOAD
@@ -49,6 +51,8 @@ var show_popup := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	PASTE_BIN_API_KEY = _get_saved_paste_bin_key()
+	
 	Global.current_game_mode = Global.GAME_MODE.EDITOR
 	
 	connect_btn_and_event_without_propagation(
@@ -96,6 +100,8 @@ func _ready() -> void:
 		load_btn,
 		_on_load_btn
 	)
+	
+	connect_btn_and_event_without_propagation(upload_btn, _on_upload_btn)
 	connect_btn_and_event_without_propagation(check_btn, _on_check_path)
 	
 	popup_exit_btn.pressed.connect(func() -> void:
@@ -279,3 +285,30 @@ func _on_slot_item_click(map_name: String, slot_btn: Button) -> void:
 	
 	maze.set_tile_map_data_from_array(file)
 	
+func _get_saved_paste_bin_key() -> String:
+	
+	var file_access := FileAccess
+	
+	if file_access.file_exists("user://pastebin_key.dat"):		
+		var file := FileAccess.get_file_as_string("user://pastebin_key.dat")
+		return file	
+	
+	return ''	
+
+func _upload_to_paste_bin() -> void:
+	pass
+	
+func _download_from_paste_bin() -> void:
+	pass
+
+func _on_upload_btn() -> void:	
+	if not PASTE_BIN_API_KEY:
+		var settings_page = load("res://scene/setting.tscn")	
+		settings_page = settings_page.instantiate()
+		add_sibling(settings_page)
+		
+		return
+	
+	# Implement Paste Bin Upload Feature
+	
+	#https://pastebin.com/doc_api#1

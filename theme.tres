@@ -56,6 +56,7 @@ Button/styles/disabled = SubResource("StyleBoxFlat_w6gfw")
 Button/styles/hover = SubResource("StyleBoxFlat_kk1ec")
 Button/styles/normal = SubResource("StyleBoxFlat_g70ch")
 Button/styles/pressed = SubResource("StyleBoxFlat_iava5")
+TextEdit/font_sizes/font_size = 12
 TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
 TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 TooltipLabel/constants/outline_size = 1

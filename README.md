@@ -15,3 +15,7 @@ Breadcrumbs: Use breadcrumbs to mark paths and avoid wandering in circles. You h
 ## Map Editor Controls
 
 - Escape: Exit preview mode
+
+## Upload to the Pastebin and Play from There
+
+You can now upload your maze to PasteBin and share it with a friend to play directly from there. But you have to bring your own key. (BYOK)

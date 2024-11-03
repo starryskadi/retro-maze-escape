@@ -147,7 +147,6 @@ icon = ExtResource("14_s028x")
 
 [node name="Upload" type="Button" parent="ButtonsLayer/TopRightBar"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 action_mode = 0
 icon = ExtResource("13_wwqsv")

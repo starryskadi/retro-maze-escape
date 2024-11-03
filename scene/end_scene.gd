@@ -7,6 +7,8 @@ func _ready() -> void:
 	exit_btn.pressed.connect(func() -> void:
 		get_tree().change_scene_to_file("res://scene/start_scene.tscn")	
 	)
+	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -50,6 +50,23 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_f3mdi"]
+resource_name = "bg_animation"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Game:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-191, -245)]
+}
+
 [sub_resource type="Animation" id="Animation_x76de"]
 resource_name = "label_animation"
 length = 10.0
@@ -76,23 +93,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_f3mdi"]
-resource_name = "bg_animation"
-length = 10.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Game:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 10),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-191, -245)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c5n28"]
@@ -152,9 +152,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -89.0
-offset_top = -126.0
+offset_top = -144.0
 offset_right = 89.0
-offset_bottom = -78.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -179,6 +179,17 @@ theme_override_styles/pressed = ExtResource("6_li5xo")
 theme_override_styles/normal = ExtResource("6_li5xo")
 action_mode = 0
 text = "Create Own Maze"
+
+[node name="Setting" type="Button" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_pu4d2")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/hover = ExtResource("6_li5xo")
+theme_override_styles/pressed = ExtResource("6_li5xo")
+theme_override_styles/normal = ExtResource("6_li5xo")
+action_mode = 0
+text = "Setting"
 
 [node name="BGAnimation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
