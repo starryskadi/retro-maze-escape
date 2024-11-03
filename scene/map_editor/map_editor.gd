@@ -182,6 +182,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_indicator.set_cell(selected_tile, 0 , Vector2i(0,0))		
 		emit_camera_view_port_changed()
 
+	if event is InputEventGesture and event is InputEventPanGesture:		
+		pointer.position += event.delta * 2.5
+		
+		emit_camera_view_port_changed()		
+		
+		
 func emit_camera_view_port_changed():
 	var current_viewport_with_zoom = (Vector2(1, 1) / camera_2d.zoom) * camera_viewport
 	var current_camera_position = camera_2d.get_screen_center_position()
